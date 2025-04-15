@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mini_notion/models/entry_model.dart';
 
 class EntryItem extends StatefulWidget {
-  const EntryItem({super.key});
+  final Entry entry;
+  const EntryItem({super.key, required this.entry});
 
   @override
   State<EntryItem> createState() => _EntryItemState();
@@ -10,6 +12,15 @@ class EntryItem extends StatefulWidget {
 class _EntryItemState extends State<EntryItem> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return ListTile(
+      title: Text(widget.entry.title),
+      trailing: Icon(Icons.arrow_forward_ios),
+      tileColor: Colors.blueGrey,
+      textColor: Colors.white,
+      iconColor: Colors.white,
+      onTap: () {
+
+      },
+    );
   }
 }

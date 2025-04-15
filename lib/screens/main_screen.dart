@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mini_notion/models/categories.dart';
+import 'package:mini_notion/models/entry_model.dart';
 
 import '../widgets/entry_item.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  final List<Entry> entries;
+
+  const MainScreen({super.key, required this.entries});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -21,9 +25,9 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: ListView.separated(
         padding: EdgeInsets.all(10),
-        itemCount: 0,
+        itemCount: widget.entries.length,
         itemBuilder: (context, index) {
-          return EntryItem();
+          return EntryItem(entry: Entry(widget.entries[index].title, widget.entries[index].description, widget.entries[index].categories));
         }, separatorBuilder: (BuildContext context, int index) => const Divider(),
       ),
       floatingActionButton: FloatingActionButton(
