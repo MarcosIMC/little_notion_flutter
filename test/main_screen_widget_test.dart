@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mini_notion/models/categories.dart';
 import 'package:mini_notion/models/entry_model.dart';
 import 'package:mini_notion/screens/main_screen.dart';
+import 'package:mini_notion/screens/new_entry_screen.dart';
 import 'package:mini_notion/widgets/entry_item.dart';
 
 void main() {
@@ -32,6 +33,14 @@ void main() {
       expect(find.text('Prueba 1'), findsOneWidget);
       expect(find.text('Prueba 2'), findsOneWidget);
       expect(find.text('Prueba 3'), findsOneWidget);
+    });
+
+    testWidgets('Navigate to "Entry Screen" when press the FAB', (tester) async {
+      await tester.pumpWidget(buildTestableWidget());
+      await tester.tap(find.byType(FloatingActionButton));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(NewEntryScreen), findsOneWidget);
     });
   });
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mini_notion/models/categories.dart';
 import 'package:mini_notion/models/entry_model.dart';
+import 'package:mini_notion/screens/new_entry_screen.dart';
 
 import '../widgets/entry_item.dart';
 
@@ -31,7 +32,9 @@ class _MainScreenState extends State<MainScreen> {
         }, separatorBuilder: (BuildContext context, int index) => const Divider(),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => NewEntryScreen()));
+        },
         child: const Icon(Icons.add),
       ),
     );
