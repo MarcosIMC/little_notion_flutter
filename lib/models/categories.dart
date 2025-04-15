@@ -5,7 +5,7 @@ enum CategoriesEnum {
   IDIA
 }
 
-class Categories {
+/*class Categories {
   final Map<CategoriesEnum, String> _categoriesMap = {
     CategoriesEnum.TASK: 'Tarea',
     CategoriesEnum.NOTE: 'Nota',
@@ -16,6 +16,6 @@ class Categories {
   Map<CategoriesEnum, String> get categoriesMap => _categoriesMap;
 
 
-}
+}*/
 
 
