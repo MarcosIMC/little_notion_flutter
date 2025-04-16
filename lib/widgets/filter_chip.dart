@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mini_notion/models/categories.dart';
+import 'package:mini_notion/providers/categories_provider.dart';
+import 'package:provider/provider.dart';
 
 class FilterChipWidget extends StatefulWidget {
   const FilterChipWidget({super.key});
@@ -9,24 +11,24 @@ class FilterChipWidget extends StatefulWidget {
 }
 
 class _FilterChipWidgetState extends State<FilterChipWidget> {
-  Set<CategoriesEnum> _selectedCategory = {};
-
   @override
   Widget build(BuildContext context) {
+    final categoriesProvider = Provider.of<CategoriesProvider>(context);
+
     return Wrap(
       runSpacing: 8,
       spacing: 8,
       children:CategoriesEnum.values.map((category) {
-        final isSelected = _selectedCategory.contains(category);
+        final isSelected = categoriesProvider.contains(category);
         return FilterChip(
             label: Text(category.name),
             selected: isSelected,
             onSelected: (bool selected) {
               setState(() {
                 if (selected) {
-                  _selectedCategory.add(category);
+                  categoriesProvider.add(category);
                 } else {
-                  _selectedCategory.remove(category);
+                  categoriesProvider.remove(category);
                 }
               });
             }

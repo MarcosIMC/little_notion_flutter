@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mini_notion/providers/new_entry_form_provider.dart';
 import 'package:mini_notion/screens/new_entry_screen.dart';
 import 'package:mini_notion/widgets/filter_chip.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   group('New Entry screen should', () {
+    late FormEntryProvider formEntryProvider;
+
+    setUp(() {
+      formEntryProvider = FormEntryProvider();
+    });
+
     Widget buildTestableWidget() {
-      return MaterialApp(
-        home: NewEntryScreen(),
+      return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<FormEntryProvider>.value(value: formEntryProvider,)
+        ],
+        child: const MaterialApp(
+            home: NewEntryScreen()
+        ),
       );
     }
 
@@ -19,6 +32,15 @@ void main() {
       expect(find.byType(FilterChipWidget), findsExactly(1));
       expect(find.ancestor(of: find.text('Type ur task...'), matching: find.byType(TextFormField)), findsOneWidget);
       expect(find.byType(FilledButton), findsOneWidget);
+    });
+    
+    testWidgets('Check if show the validator message on "title" and "description"', (tester) async {
+      await tester.pumpWidget(buildTestableWidget());
+      await tester.tap(find.byType(FilledButton));
+      await tester.pumpAndSettle();
+      
+      expect(find.text('Please, type a title for a new entry.'), findsOneWidget);
+      expect(find.text('Please, type a task description.'), findsOneWidget);
     });
   });
 }
