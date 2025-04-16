@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:mini_notion/providers/categories_provider.dart';
+import 'package:mini_notion/providers/entry_provider.dart';
+import 'package:mini_notion/providers/new_entry_form_provider.dart';
 import 'package:mini_notion/screens/main_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => FormEntryProvider()),
+        ChangeNotifierProvider(create: (_) => EntryProvider()),
+        ChangeNotifierProvider(create: (_) => CategoriesProvider())
+      ],
+      child: MyApp(),
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {

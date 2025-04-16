@@ -5,13 +5,14 @@ import 'package:mini_notion/models/entry_model.dart';
 import 'package:mini_notion/screens/main_screen.dart';
 import 'package:mini_notion/screens/new_entry_screen.dart';
 import 'package:mini_notion/widgets/entry_item.dart';
+import 'package:uuid/uuid.dart';
 
 void main() {
   group('Main screen widget should', () {
     final fakeEntries = [
-      Entry('Prueba 1', 'aaaaaaa', CategoriesEnum.IDIA),
-      Entry('Prueba 2', 'bbbbbbb', CategoriesEnum.PROJECT),
-      Entry('Prueba 3', 'ccccccc', CategoriesEnum.NOTE)
+      Entry(Uuid().v4(), 'Prueba 1', 'aaaaaaa', [CategoriesEnum.IDIA], DateTime.now()),
+      Entry(Uuid().v4(), 'Prueba 2', 'bbbbbbb', [CategoriesEnum.PROJECT], DateTime.now()),
+      Entry(Uuid().v4(), 'Prueba 3', 'ccccccc', [CategoriesEnum.NOTE], DateTime.now())
     ];
 
     Widget buildTestableWidget() {
