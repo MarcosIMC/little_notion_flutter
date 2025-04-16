@@ -10,6 +10,13 @@ class SqlHelper {
 
   static Database? _database;
 
+  static Database? _externalTestDB;
+
+  static void injectTestDatabase(Database db) {
+    _externalTestDB = db;
+    _database = db;
+  }
+
   Future<Database> get database async {
     if (_database != null) return _database!;
 
@@ -32,5 +39,12 @@ class SqlHelper {
   Future<int?> insertEntry(Entry entry) async {
     final db = await database;
     return await db.insert('tasks', entry.toMap());
+  }
+
+  Future<List<Entry>> getAll() async {
+    final db = await database;
+    final List<Map<String, dynamic>> result = await db.query('tasks');
+
+    return result.map((map) => Entry.fromMap(map)).toList();
   }
 }

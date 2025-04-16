@@ -13,4 +13,8 @@ class EntryProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<List<Entry>> allEntries() async {
+    return await _sqlHelper.getAll();
+  }
 }
