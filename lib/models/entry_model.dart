@@ -28,4 +28,18 @@ class Entry {
       'date': date
     };
   }
+
+  static Entry fromMap(Map<String, dynamic> map) {
+    return Entry(map['id'], map['title'], map['description'], _convertToEnum(map['categories'].split(',')), map['date']);
+  }
+
+  static List<CategoriesEnum> _convertToEnum(List<String> list) {
+    List<CategoriesEnum> enums = [];
+
+    for (var element in list) {
+      CategoriesEnum.values.map((enumElement) => enumElement.name == element ? enums.add(enumElement) : null);
+    }
+
+    return enums;
+  }
 }

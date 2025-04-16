@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mini_notion/models/entry_model.dart';
 import 'package:mini_notion/screens/new_entry_screen.dart';
-import 'package:uuid/uuid.dart';
 
 import '../widgets/entry_item.dart';
+import '../widgets/list_item.dart';
 
 class MainScreen extends StatefulWidget {
-  final List<Entry> entries;
 
-  const MainScreen({super.key, required this.entries});
+
+
+  const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -24,13 +24,7 @@ class _MainScreenState extends State<MainScreen> {
           IconButton(onPressed: () {}, icon: Icon(Icons.search))
         ],
       ),
-      body: ListView.separated(
-        padding: EdgeInsets.all(10),
-        itemCount: widget.entries.length,
-        itemBuilder: (context, index) {
-          return EntryItem(entry: Entry(Uuid().v4(), widget.entries[index].title, widget.entries[index].description, widget.entries[index].categories, widget.entries[index].date));
-        }, separatorBuilder: (BuildContext context, int index) => const Divider(),
-      ),
+      body: ListItem(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) => NewEntryScreen()));
