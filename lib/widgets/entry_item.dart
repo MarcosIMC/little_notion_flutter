@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mini_notion/models/entry_model.dart';
+import 'package:mini_notion/screens/detail_task_screen.dart';
 
 class EntryItem extends StatefulWidget {
   final Entry entry;
@@ -19,7 +20,7 @@ class _EntryItemState extends State<EntryItem> {
       textColor: Colors.white,
       iconColor: Colors.white,
       onTap: () {
-
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailTaskScreen(entry: widget.entry)));
       },
     );
   }
